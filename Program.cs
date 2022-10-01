@@ -69,7 +69,7 @@ class Programm
                         do
                         {
                             Console.Clear();
-                            Console.WriteLine("1.Add\n2.Search\n3.Delete\n4.PrintAll\n");
+                            Console.WriteLine("1.Add\n2.Search\n3.Delete\n4.PrintAll\n5.Edit(name)\n6.Edit(avtorname)\n7.Edit(year)\n");
                             vvod2 = Console.ReadKey().KeyChar;
                             switch(vvod2)
                             {
@@ -94,6 +94,24 @@ class Programm
                                 case '4':
                                     Console.Clear();
                                     books.PrintAll();
+                                    Console.WriteLine("\nPress any key to continue.");
+                                    Console.ReadKey();
+                                    break;
+                                case '5':
+                                    Console.Clear();
+                                    books.Edit(1, books.SearchByName());
+                                    Console.WriteLine("\nPress any key to continue.");
+                                    Console.ReadKey();
+                                    break;
+                                case '6':
+                                    Console.Clear();
+                                    books.Edit(2, books.SearchByName());
+                                    Console.WriteLine("\nPress any key to continue.");
+                                    Console.ReadKey();
+                                    break;
+                                case '7':
+                                    Console.Clear();
+                                    books.Edit(3, books.SearchByName());
                                     Console.WriteLine("\nPress any key to continue.");
                                     Console.ReadKey();
                                     break;
@@ -375,7 +393,7 @@ class ListofBooks
         if(books[0].Name.Length > 1)
         for (int i = 0; i < books.Length; i++)
         {
-            Console.Write((i + 1) +": ");
+            Console.WriteLine((i + 1) +": ");
             books[i].Print();
         }
         else
@@ -412,6 +430,33 @@ class ListofBooks
                 books[i] = books[i + 1];
             }
             Array.Resize(ref books, books.Length - 1);
+        }
+    }
+    public void Edit(int f, int id)
+    {
+        if (books[0].Name.Length > 1)
+        {
+            if (f == 1)
+            {
+                Console.Write("Введите имя: ");
+                books[id].Name = Console.ReadLine();
+            }
+            if (f == 2)
+            {
+                Console.Write("Введите имя автора: ");
+                books[id].Avtorname = Console.ReadLine();
+            }
+            if (f == 3)
+            {
+                string? str = "asd";
+                Console.Write("Введите год: ");
+                while (!Prover(str))
+                {
+                    str = Console.ReadLine();
+                    if (!Prover(str)) Console.WriteLine("Ошибка.\nВведите год.");
+                }
+                books[id].Year = int.Parse(str);
+            }
         }
     }
 }
